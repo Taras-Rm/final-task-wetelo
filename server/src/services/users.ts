@@ -1,8 +1,8 @@
-import prisma from "./database";
 import HttpException from "../errors/httpException";
 import { excludeFields } from "../utils/helper";
 import HTTP_STATUS from "../utils/httpStatusCodes";
 import { UpdateUserByIdDto } from "../types";
+import prisma from "../database";
 
 const getAllUsers = async () => {
   const users = await prisma.user.findMany({});

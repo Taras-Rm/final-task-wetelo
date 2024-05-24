@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import prisma from "../services/database";
 import ApiError from "../errors/httpException";
 import HTTP_STATUS from "../utils/httpStatusCodes";
 import jwt from "jsonwebtoken";
+import prisma from "../database";
 
 const auth = async (req: Request, res: Response, next: NextFunction) => {
   try {

@@ -1,4 +1,3 @@
-import prisma from "./database";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import HttpException from "../errors/httpException";
@@ -6,6 +5,7 @@ import HTTP_STATUS from "../utils/httpStatusCodes";
 import { excludeFields } from "../utils/helper";
 // import { sendVerifyUserRegistration } from "../mailSender.js";
 import { LoginUserDto, RegisterUserDto } from "../types";
+import prisma from "../database";
 
 const registerUser = async ({
   name,

@@ -1,7 +1,7 @@
-import prisma from "./database";
 import HttpException from "../errors/httpException";
 import HTTP_STATUS from "../utils/httpStatusCodes";
 import { CreateAdvertDto, UpdateAdvertByIdDto } from "../types";
+import prisma from "../database";
 
 const getAllAdverts = async () => {
   const adverts = await prisma.advert.findMany();
