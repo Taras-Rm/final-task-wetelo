@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-// import errorHandler from "./middlewares/errorHandler.js";
+import errorHandler from "./middlewares/errorHandler";
 import router from "./routes/index";
 import cors from "cors";
 
@@ -14,6 +14,6 @@ app.use(express.json());
 
 app.use("/api/v1", router);
 
-// app.use(errorHandler);
+app.use(errorHandler);
 
 export default app;
