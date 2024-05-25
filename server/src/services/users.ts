@@ -1,7 +1,7 @@
 import HttpException from "../errors/httpException";
 import { excludeFields } from "../utils/helper";
 import HTTP_STATUS from "../utils/httpStatusCodes";
-import { UpdateUserByIdDto } from "../types/types";
+import { UpdateUserById } from "../types/types";
 import prisma from "../database";
 
 const getAllUsers = async () => {
@@ -15,12 +15,7 @@ const getAllUsers = async () => {
   return readyUsers;
 };
 
-const updateUserById = async ({
-  id,
-  name,
-  phone,
-  email,
-}: UpdateUserByIdDto) => {
+const updateUserById = async ({ id, name, phone, email }: UpdateUserById) => {
   const user = await prisma.user.update({
     data: {
       name,

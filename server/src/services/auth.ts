@@ -4,15 +4,10 @@ import HttpException from "../errors/httpException";
 import HTTP_STATUS from "../utils/httpStatusCodes";
 import { excludeFields } from "../utils/helper";
 // import { sendVerifyUserRegistration } from "../mailSender.js";
-import { LoginUserDto, RegisterUserDto } from "../types/types";
+import { LoginUser, RegisterUser } from "../types/types";
 import prisma from "../database";
 
-const registerUser = async ({
-  name,
-  phone,
-  email,
-  password,
-}: RegisterUserDto) => {
+const registerUser = async ({ name, phone, email, password }: RegisterUser) => {
   const existingUser = await prisma.user.findFirst({
     where: {
       email,
@@ -50,7 +45,7 @@ const registerUser = async ({
   return excludeFields(createdUser, ["password"]);
 };
 
-const loginUser = async ({ email, password }: LoginUserDto) => {
+const loginUser = async ({ email, password }: LoginUser) => {
   const user = await prisma.user.findFirst({
     where: {
       email,
