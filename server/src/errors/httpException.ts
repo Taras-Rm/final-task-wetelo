@@ -1,8 +1,8 @@
 import HTTP_STATUS from "../utils/httpStatusCodes";
 
 class HttpException {
-  code;
-  message;
+  private code;
+  private message;
 
   constructor(code: number, message: string) {
     this.code = code;

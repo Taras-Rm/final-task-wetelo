@@ -1,4 +1,5 @@
 import { Role as PrismaRole } from "@prisma/client";
+import { templates } from "../templates/email";
 
 export type Role = PrismaRole;
 
@@ -34,3 +35,5 @@ export type UpdateAdvertById = {
   description?: string;
   price: number;
 };
+
+export type TemplateName = keyof typeof templates;

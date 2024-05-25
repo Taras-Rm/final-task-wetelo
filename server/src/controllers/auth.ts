@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import authService from "../services/auth";
 import HTTP_STATUS from "../utils/httpStatusCodes";
+import { getCurrentUserId } from "../utils/request";
 
 // register a new user
 const register = async (req: Request, res: Response, next: NextFunction) => {
@@ -36,7 +37,9 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 // get me
 const me = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const user = await authService.me(req.user?.id);
+    const userId = getCurrentUserId(req);
+
+    const user = await authService.me(userId);
 
     res.status(HTTP_STATUS.OK).json(user);
   } catch (error) {

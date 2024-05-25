@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Response, Router } from "express";
 import HTTP_STATUS from "../utils/httpStatusCodes";
 import auth from "../middlewares/auth";
 import authRouter from "./auth";
@@ -9,7 +9,7 @@ import authorizeRole from "../middlewares/authorizeRole";
 const router = Router();
 
 // api healthcheck route
-router.get("/ping", (req, res) => {
+router.get("/ping", (_, res: Response) => {
   res.status(HTTP_STATUS.OK).json({ message: "pong" });
 });
 

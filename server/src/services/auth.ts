@@ -7,6 +7,7 @@ import { excludeFields } from "../utils/helper";
 import { LoginUser, RegisterUser } from "../types/types";
 import prisma from "../database";
 import config from "../config";
+import { sendEmail } from "./emailSender";
 
 const registerUser = async ({ name, phone, email, password }: RegisterUser) => {
   const existingUser = await prisma.user.findFirst({
@@ -33,14 +34,21 @@ const registerUser = async ({ name, phone, email, password }: RegisterUser) => {
     },
   });
 
-  if (false) {
+  if (config.mail.isAllowedSending) {
     const admins = await prisma.user.findMany({ where: { role: "admin" } });
 
     // send verification email to admins
-    // await sendVerifyUserRegistration(
-    //   createdUser,
-    //   admins.map((a) => a.email)
-    // );
+    admins.forEach((admin) => {
+      sendEmail({
+        to: admin.email,
+        subject: "New user registered",
+        templateName: "verifyNewRegisteredUser",
+        context: {
+          name: createdUser.name,
+          email: createdUser.email,
+        },
+      });
+    });
   }
 
   return excludeFields(createdUser, ["password"]);
@@ -79,11 +87,7 @@ const generateToken = (id: number) => {
   });
 };
 
-const me = async (id: number | undefined) => {
-  if (!id) {
-    throw new HttpException(HTTP_STATUS.SERVER_ERROR, `empty id`);
-  }
-
+const me = async (id: number) => {
   const user = await prisma.user.findFirst({
     where: {
       id,

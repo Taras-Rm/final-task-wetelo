@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import advertsService from "../services/adverts";
 import HTTP_STATUS from "../utils/httpStatusCodes";
+import { getCurrentUserId } from "../utils/request";
 
 // get all adverts
 const getAllAdverts = async (
@@ -26,11 +27,13 @@ const createAdvert = async (
   try {
     const { title, description, price } = req.body;
 
+    const userId = getCurrentUserId(req);
+
     const createdAdvert = await advertsService.createAdvert({
       title,
       description,
       price: parseFloat(price),
-      userId: req.user?.id || 0, // !!!!
+      userId: userId,
     });
 
     res.status(HTTP_STATUS.CREATED).json(createdAdvert);

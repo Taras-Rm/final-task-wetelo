@@ -10,8 +10,11 @@ interface Config {
     url: string;
   };
   mail: {
+    host: string;
+    port: number;
     senderEmail: string;
     senderPassword: string;
+    isAllowedSending: boolean;
   };
   salt: number;
   jwt: {
@@ -28,8 +31,11 @@ const config: Config = {
     url: process.env.DATABASE_URL || "",
   },
   mail: {
+    host: process.env.MAIL_SENDER_HOST || "",
+    port: parseInt(process.env.MAIL_SENDER_PORT || "587"),
     senderEmail: process.env.MAIL_SENDER_EMAIL || "",
     senderPassword: process.env.MAIL_SENDER_PASSWORD || "",
+    isAllowedSending: process.env.MAIL_SENDER_IS_ALLOWED_SENDING === "true" || false,
   },
   salt: parseInt(process.env.SALT_ROUNDS || "10"),
   jwt: {
