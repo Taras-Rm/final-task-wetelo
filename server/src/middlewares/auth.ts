@@ -3,10 +3,11 @@ import ApiError from "../errors/httpException";
 import HTTP_STATUS from "../utils/httpStatusCodes";
 import jwt from "jsonwebtoken";
 import prisma from "../database";
+import { JwtAuth } from "../types/auth";
 
 const authorizationHeader = "authorization";
 
-const auth = async (req: Request, res: Response, next: NextFunction) => {
+const auth = async (req: Request, _: Response, next: NextFunction) => {
   try {
     const bearerStr = req.headers[authorizationHeader];
     if (!bearerStr) {
@@ -41,7 +42,7 @@ const auth = async (req: Request, res: Response, next: NextFunction) => {
       throw new ApiError(HTTP_STATUS.NOT_AUTHORIZED, "not authorized");
     }
 
-    const baseUserInfo = {
+    const baseUserInfo: JwtAuth = {
       id: tokenData.id,
       role: user.role,
       isVerified: user.isVerified,

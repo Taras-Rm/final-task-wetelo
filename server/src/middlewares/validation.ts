@@ -4,7 +4,7 @@ import HTTP_STATUS from "../utils/httpStatusCodes";
 import { NextFunction, Request, Response } from "express";
 
 export const validate = (validations: ValidationChain[]) => {
-  return async function (req: Request, res: Response, next: NextFunction) {
+  return async function (req: Request, _: Response, next: NextFunction) {
     try {
       await Promise.all(validations.map((validation) => validation.run(req)));
 

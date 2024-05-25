@@ -3,7 +3,7 @@ import HttpException from "../errors/httpException";
 
 const errorHandler = (
   err: any,
-  req: Request,
+  _: Request,
   res: Response,
   next: NextFunction
 ) => {

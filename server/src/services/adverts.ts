@@ -1,6 +1,6 @@
 import HttpException from "../errors/httpException";
 import HTTP_STATUS from "../utils/httpStatusCodes";
-import { CreateAdvertDto, UpdateAdvertByIdDto } from "../types";
+import { CreateAdvert, UpdateAdvertById } from "../types/types";
 import prisma from "../database";
 
 const getAllAdverts = async () => {
@@ -14,7 +14,7 @@ const createAdvert = async ({
   description,
   price,
   userId,
-}: CreateAdvertDto) => {
+}: CreateAdvert) => {
   const advert = await prisma.advert.create({
     data: {
       title,
@@ -32,7 +32,7 @@ const updateAdvertById = async ({
   title,
   description,
   price,
-}: UpdateAdvertByIdDto) => {
+}: UpdateAdvertById) => {
   const advert = await prisma.advert.update({
     data: {
       title,

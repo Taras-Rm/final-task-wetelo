@@ -4,7 +4,7 @@ import HttpException from "../errors/httpException";
 import HTTP_STATUS from "../utils/httpStatusCodes";
 import { excludeFields } from "../utils/helper";
 // import { sendVerifyUserRegistration } from "../mailSender.js";
-import { LoginUserDto, RegisterUserDto } from "../types";
+import { LoginUserDto, RegisterUserDto } from "../types/types";
 import prisma from "../database";
 
 const registerUser = async ({

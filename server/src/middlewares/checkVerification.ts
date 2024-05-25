@@ -2,7 +2,7 @@ import HTTP_STATUS from "../utils/httpStatusCodes";
 import HttpException from "../errors/httpException";
 import { NextFunction, Request, Response } from "express";
 
-const checkVerification = (req: Request, res: Response, next: NextFunction) => {
+const checkVerification = (req: Request, _: Response, next: NextFunction) => {
   try {
     const isVerified = req.user?.isVerified;
     if (typeof isVerified === "undefined") {

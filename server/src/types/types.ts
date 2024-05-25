@@ -1,30 +1,34 @@
-export type RegisterUserDto = {
+import { Role as PrismaRole } from "@prisma/client";
+
+export type Role = PrismaRole;
+
+export type RegisterUser = {
   name: string;
   phone: string;
   email: string;
   password: string;
 };
 
-export type LoginUserDto = {
+export type LoginUser = {
   email: string;
   password: string;
 };
 
-export type UpdateUserByIdDto = {
+export type UpdateUserById = {
   id: number;
   name: string;
   phone: string;
   email: string;
 };
 
-export type CreateAdvertDto = {
+export type CreateAdvert = {
   title: string;
   description?: string;
   price: number;
   userId: number;
 };
 
-export type UpdateAdvertByIdDto = {
+export type UpdateAdvertById = {
   id: number;
   title: string;
   description?: string;

@@ -1,7 +1,7 @@
 import HttpException from "../errors/httpException";
 import { excludeFields } from "../utils/helper";
 import HTTP_STATUS from "../utils/httpStatusCodes";
-import { UpdateUserByIdDto } from "../types";
+import { UpdateUserByIdDto } from "../types/types";
 import prisma from "../database";
 
 const getAllUsers = async () => {
