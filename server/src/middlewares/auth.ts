@@ -4,9 +4,11 @@ import HTTP_STATUS from "../utils/httpStatusCodes";
 import jwt from "jsonwebtoken";
 import prisma from "../database";
 
+const authorizationHeader = "authorization";
+
 const auth = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const bearerStr = req.headers["authorization"];
+    const bearerStr = req.headers[authorizationHeader];
     if (!bearerStr) {
       throw new ApiError(HTTP_STATUS.BAD_REQUEST, "empty authorization header");
     }
@@ -41,7 +43,7 @@ const auth = async (req: Request, res: Response, next: NextFunction) => {
 
     const baseUserInfo = {
       id: tokenData.id,
-      role: user.role ? "admin" : "user",
+      role: user.role,
       isVerified: user.isVerified,
     };
 

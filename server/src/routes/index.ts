@@ -4,6 +4,7 @@ import auth from "../middlewares/auth";
 import authRouter from "./auth";
 import usersRouter from "./users";
 import advertsRouter from "./adverts";
+import authorizeRole from "../middlewares/authorizeRole";
 
 const router = Router();
 
@@ -14,6 +15,6 @@ router.get("/ping", (req, res) => {
 
 router.use("/auth", authRouter);
 router.use("/adverts", auth, advertsRouter);
-router.use("/users", auth, usersRouter);
+router.use("/users", auth, authorizeRole(["admin"]), usersRouter);
 
 export default router;

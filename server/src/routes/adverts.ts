@@ -1,31 +1,31 @@
 import { Router } from "express";
 import advertsController from "../controllers/adverts";
-// import {
-//   createAdvertValidator,
-//   deleteAdvertValidator,
-//   updateAdvertValidator,
-// } from "../validators/adverts.js";
-// import checkVerification from "../middlewares/checkVerification";
+import {
+  createAdvertValidator,
+  deleteAdvertValidator,
+  updateAdvertValidator,
+} from "../validators/adverts";
+import checkVerification from "../middlewares/checkVerification";
 
 const router = Router();
 
 router.get("/", advertsController.getAllAdverts);
 router.post(
   "/",
-  // checkVerification,
-  // createAdvertValidator,
+  checkVerification,
+  createAdvertValidator,
   advertsController.createAdvert
 );
 router.put(
   "/:id",
-  // checkVerification,
-  // updateAdvertValidator,
+  checkVerification,
+  updateAdvertValidator,
   advertsController.updateAdvert
 );
 router.delete(
   "/:id",
-  // checkVerification,
-  // deleteAdvertValidator,
+  checkVerification,
+  deleteAdvertValidator,
   advertsController.deleteAdvert
 );
 
