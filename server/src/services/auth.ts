@@ -6,6 +6,7 @@ import { excludeFields } from "../utils/helper";
 // import { sendVerifyUserRegistration } from "../mailSender.js";
 import { LoginUser, RegisterUser } from "../types/types";
 import prisma from "../database";
+import config from "../config";
 
 const registerUser = async ({ name, phone, email, password }: RegisterUser) => {
   const existingUser = await prisma.user.findFirst({
@@ -32,7 +33,7 @@ const registerUser = async ({ name, phone, email, password }: RegisterUser) => {
     },
   });
 
-  if (process.env.SEND_VERIFY_USER_MAIL === "true") {
+  if (false) {
     const admins = await prisma.user.findMany({ where: { role: "admin" } });
 
     // send verification email to admins
@@ -73,8 +74,8 @@ const loginUser = async ({ email, password }: LoginUser) => {
 };
 
 const generateToken = (id: number) => {
-  return jwt.sign({ id }, "secret", {
-    expiresIn: process.env.TOKEN_EXP_TIME,
+  return jwt.sign({ id }, config.jwt.secret, {
+    expiresIn: config.jwt.expTime,
   });
 };
 

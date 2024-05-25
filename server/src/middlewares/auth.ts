@@ -4,6 +4,7 @@ import HTTP_STATUS from "../utils/httpStatusCodes";
 import jwt from "jsonwebtoken";
 import prisma from "../database";
 import { JwtAuth } from "../types/auth";
+import config from "../config";
 
 const authorizationHeader = "authorization";
 
@@ -57,7 +58,7 @@ const auth = async (req: Request, _: Response, next: NextFunction) => {
 
 async function jwtVerify(token: string) {
   return new Promise((res, rej) => {
-    jwt.verify(token, "secret", (err, decoded) => {
+    jwt.verify(token, config.jwt.secret, (err, decoded) => {
       if (err) {
         rej(err);
       } else {
