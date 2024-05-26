@@ -5,7 +5,7 @@ import { UpdateUserByIdModel } from "../types/models";
 import prisma from "../database";
 
 const getAllUsers = async () => {
-  const users = await prisma.user.findMany({});
+  const users = await prisma.user.findMany();
 
   const readyUsers = [];
   for (let user of users) {

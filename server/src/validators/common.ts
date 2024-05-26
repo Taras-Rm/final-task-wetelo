@@ -55,7 +55,7 @@ const priceValidator = () =>
     .isFloat({ gt: 0 })
     .withMessage("price should be a positive number");
 
-const idParamValidator = () =>
+const idValidator = () =>
   param("id").isInt().withMessage("id param should be a number");
 
 export {
@@ -63,7 +63,7 @@ export {
   phoneValidator,
   emailValidator,
   passwordValidator,
-  idParamValidator,
+  idValidator,
   titleValidator,
   descriptionValidator,
   priceValidator,

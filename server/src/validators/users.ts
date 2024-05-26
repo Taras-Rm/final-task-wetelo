@@ -1,7 +1,7 @@
 import { validate } from "../middlewares/validation";
 import {
   emailValidator,
-  idParamValidator,
+  idValidator,
   nameValidator,
   phoneValidator,
 } from "./common";
@@ -10,14 +10,14 @@ const updateUserValidator = validate([
   nameValidator(),
   phoneValidator(),
   emailValidator(),
-  idParamValidator(),
+  idValidator(),
 ]);
 
-const deleteUserValidator = validate([idParamValidator()]);
+const deleteUserValidator = validate([idValidator()]);
 
-const verifyUserValidator = validate([idParamValidator()]);
+const verifyUserValidator = validate([idValidator()]);
 
-const getUserValidator = validate([idParamValidator()]);
+const getUserValidator = validate([idValidator()]);
 
 export {
   updateUserValidator,

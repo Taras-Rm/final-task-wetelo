@@ -1,7 +1,7 @@
 import { validate } from "../middlewares/validation";
 import {
   descriptionValidator,
-  idParamValidator,
+  idValidator,
   priceValidator,
   titleValidator,
 } from "./common";
@@ -16,9 +16,16 @@ const updateAdvertValidator = validate([
   titleValidator(),
   descriptionValidator(),
   priceValidator(),
-  idParamValidator(),
+  idValidator(),
 ]);
 
-const deleteAdvertValidator = validate([idParamValidator()]);
+const idParamValidator = validate([idValidator()]);
 
-export { createAdvertValidator, updateAdvertValidator, deleteAdvertValidator };
+const deleteAdvertValidator = validate([idValidator()]);
+
+export {
+  createAdvertValidator,
+  updateAdvertValidator,
+  deleteAdvertValidator,
+  idParamValidator,
+};

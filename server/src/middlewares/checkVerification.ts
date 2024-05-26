@@ -13,7 +13,7 @@ const checkVerification = (req: Request, _: Response, next: NextFunction) => {
     }
 
     if (!isVerified) {
-      throw new HttpException(HTTP_STATUS.FORBIDDEN, "not verified yet");
+      throw new HttpException(HTTP_STATUS.FORBIDDEN, "user not verified yet");
     }
 
     next();

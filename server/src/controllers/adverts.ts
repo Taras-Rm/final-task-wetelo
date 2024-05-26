@@ -2,13 +2,11 @@ import { NextFunction, Request, Response } from "express";
 import advertsService from "../services/adverts";
 import HTTP_STATUS from "../utils/httpStatusCodes";
 import { getCurrentUserId } from "../utils/request";
+import { RequestWithBody } from "../types/request";
+import { CreateAdvertModel } from "../types/models";
 
 // get all adverts
-const getAllAdverts = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const getAllAdverts = async (_: Request, res: Response, next: NextFunction) => {
   try {
     const adverts = await advertsService.getAllAdverts();
 
@@ -20,7 +18,7 @@ const getAllAdverts = async (
 
 // create a new advert
 const createAdvert = async (
-  req: Request,
+  req: RequestWithBody<CreateAdvertModel>,
   res: Response,
   next: NextFunction
 ) => {
@@ -32,7 +30,7 @@ const createAdvert = async (
     const createdAdvert = await advertsService.createAdvert({
       title,
       description,
-      price: parseFloat(price),
+      price: price,
       userId: userId,
     });
 

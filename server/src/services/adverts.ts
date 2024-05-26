@@ -47,6 +47,16 @@ const updateAdvertById = async ({
   return advert;
 };
 
+const getAdvertById = async (id: number) => {
+  const advert = await prisma.advert.findFirst({
+    where: {
+      id,
+    },
+  });
+
+  return advert;
+};
+
 const deleteAdvertById = async (id: number) => {
   const advertForDelete = await prisma.advert.findFirst({
     where: {
@@ -75,4 +85,5 @@ export default {
   createAdvert,
   updateAdvertById,
   deleteAdvertById,
+  getAdvertById,
 };
