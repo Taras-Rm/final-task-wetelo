@@ -38,7 +38,7 @@ const registerUser = async ({
     },
   });
 
-  if (config.mail.isAllowedSending) {
+  if (config.notifyAdmins) {
     const admins = await prisma.user.findMany({ where: { role: "admin" } });
 
     // send verification email to admins

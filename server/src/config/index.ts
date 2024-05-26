@@ -15,13 +15,13 @@ interface Config {
     senderEmail: string;
     senderPassword: string;
     service: string;
-    isAllowedSending: boolean;
   };
   salt: number;
   jwt: {
     secret: string;
     expTime: string;
   };
+  notifyAdmins: boolean;
 }
 
 const config: Config = {
@@ -37,14 +37,13 @@ const config: Config = {
     senderEmail: process.env.MAIL_SENDER_EMAIL || "",
     senderPassword: process.env.MAIL_SENDER_PASSWORD || "",
     service: process.env.MAIL_SENDER_SERVICE || "",
-    isAllowedSending:
-      process.env.MAIL_SENDER_IS_ALLOWED_SENDING === "true" || false,
   },
   salt: parseInt(process.env.SALT_ROUNDS || "10"),
   jwt: {
     secret: process.env.TOKEN_SECRET || "secret",
     expTime: process.env.TOKEN_EXP_TIME || "24h",
   },
+  notifyAdmins: process.env.NOTIFY_ADMINS === "true" || false,
 };
 
 export default config;
