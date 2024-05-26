@@ -10,7 +10,7 @@ This is a basic API that allows us to work with users and adverts (CRUD). Allows
 - Prisma
 - express-validator
 
-## This API is contains such endpoints:
+## This API contains such endpoints:
 
 ### Auth
 - **POST** - localhost:3000/api/v1/auth/register (_register a new account_)
