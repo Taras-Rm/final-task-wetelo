@@ -1,0 +1,238 @@
+{
+	"info": {
+		"_postman_id": "003ac345-281d-464c-980f-bfc3111e28a7",
+		"name": "final_task_wetelo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "18283266"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Tarik\",\n    \"phone\": \"1344647890\",\n    \"email\": \"taras25@gmail.com\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3001/api/v1/auth/register"
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"tarasromaniuk555@gmail.com\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3001/api/v1/auth/login"
+					},
+					"response": []
+				},
+				{
+					"name": "me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsImlhdCI6MTcxNjcwNDc0OSwiZXhwIjoxNzE2NzkxMTQ5fQ.duqM52jflGP0O0RdV4twzVjoeX0MmXZwx-p1viTll6E"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3001/api/v1/auth/me"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "get all users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiaWF0IjoxNzE2NzA1MTMzLCJleHAiOjE3MTY3OTE1MzN9.ZN4KUzdZ2N_fjWHkhkO0Bf1ugI6NB8r8FRIIJlfyQBE"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3001/api/v1/users"
+					},
+					"response": []
+				},
+				{
+					"name": "get user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiaWF0IjoxNzE2NzA0ODkzLCJleHAiOjE3MTY3OTEyOTN9.Ry77gwcvXDpL2BqguesTgFnssPdWFAdQJviZq7D0woA"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3001/api/v1/users/13ds"
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImlhdCI6MTcxNjcwMzY5MSwiZXhwIjoxNzE2NzkwMDkxfQ.DY0jXxdyx2AjDuL44AFw_I6isoogtdZDFo-J1EhlWrQ"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Taras 2\",\n    \"phone\": \"0000000000\",\n    \"email\": \"taras25@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3001/api/v1/users/10"
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiaWF0IjoxNzE2NzEyMDk5LCJleHAiOjE3MTY3OTg0OTl9.FUrj_MH7GQ6XJOaPskXPYcK9BZMmfjjgDCUuxwsq1-g"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:3001/api/v1/users/12"
+					},
+					"response": []
+				},
+				{
+					"name": "verify user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiaWF0IjoxNzE2NzA0NDg3LCJleHAiOjE3MTY3OTA4ODd9.W42dofmOK1bhu_WG9Rng7pxiwukhLQhuYocWhL0FKwM"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": "http://localhost:3001/api/v1/users/13/verify"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "adverts",
+			"item": [
+				{
+					"name": "get all adverts",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsImlhdCI6MTcxNjcwODQ1NCwiZXhwIjoxNzE2Nzk0ODU0fQ.4FYU2G9Maa672LhTHwFXWz-41C_wa621SeE_nhza8p8"
+							}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:3001/api/v1/adverts"
+					},
+					"response": []
+				},
+				{
+					"name": "create advert",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiaWF0IjoxNzE2NzA4NTQwLCJleHAiOjE3MTY3OTQ5NDB9.xDWsoXFyIwYS6LTaMlVrwWXnoAWHWvyLXuIYWEPPObQ"
+							}
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"IPhone 13\",\n    \"description\": \"test description\",\n    \"price\": 123\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3001/api/v1/adverts"
+					},
+					"response": []
+				},
+				{
+					"name": "update advert",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTIsImlhdCI6MTcxNjcwODQ1NCwiZXhwIjoxNzE2Nzk0ODU0fQ.4FYU2G9Maa672LhTHwFXWz-41C_wa621SeE_nhza8p8"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"IPhone 100\",\n    \"description\": \"super phone\",\n    \"price\": 1000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:3001/api/v1/adverts/4"
+					},
+					"response": []
+				},
+				{
+					"name": "delete advert",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwiaWF0IjoxNzE2NzI3NDYxLCJleHAiOjE3MTY4MTM4NjF9.i4crk7hoz1uMOErGMiSG124YipoDGESRYlIuahS6rsk"
+							}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:3001/api/v1/adverts/17"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
