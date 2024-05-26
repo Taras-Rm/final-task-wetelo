@@ -5,7 +5,7 @@ import { TemplateName } from "../types/models";
 import { templates } from "../templates/email";
 
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  service: config.mail.service,
   host: config.mail.host,
   port: config.mail.port,
   secure: false,

@@ -8,6 +8,7 @@ import config from "../config";
 
 const authorizationHeader = "authorization";
 
+// auth middleware checks if the user can be authorized and after that add current user info in the request
 const auth = async (req: Request, _: Response, next: NextFunction) => {
   try {
     const bearerStr = req.headers[authorizationHeader];

@@ -5,6 +5,7 @@ import { RequestWithParams, RequestWithParamsAndBody } from "../types/request";
 import { UpdateUserByIdModel } from "../types/models";
 
 // get all users
+// GET api/v1/users
 const getAllUsers = async (_: Request, res: Response, next: NextFunction) => {
   try {
     const users = await usersService.getAllUsers();
@@ -15,7 +16,8 @@ const getAllUsers = async (_: Request, res: Response, next: NextFunction) => {
   }
 };
 
-// update an user
+// update user
+// PUT api/v1/users/:id
 const updateUser = async (
   req: RequestWithParamsAndBody<{ id: string }, UpdateUserByIdModel>,
   res: Response,
@@ -38,7 +40,8 @@ const updateUser = async (
   }
 };
 
-// delete an user
+// delete user
+// DELETE api/v1/users/:id
 const deleteUser = async (
   req: RequestWithParams<{ id: string }>,
   res: Response,
@@ -56,6 +59,7 @@ const deleteUser = async (
 };
 
 // verify user
+// PATCH api/v1/users/:id
 const verifyUser = async (
   req: RequestWithParams<{ id: string }>,
   res: Response,
@@ -72,7 +76,8 @@ const verifyUser = async (
   }
 };
 
-// get an user
+// get user
+// GET api/v1/users/:id
 const getUser = async (
   req: RequestWithParams<{ id: string }>,
   res: Response,

@@ -1,12 +1,13 @@
 import { Request } from "express";
 import HttpException from "../errors/httpException";
 import HTTP_STATUS from "./httpStatusCodes";
+import { JwtAuth } from "../types/auth";
 
-export const getCurrentUserId = (req: Request): number => {
-  const id = req.user?.id;
-  if (!id) {
-    throw new HttpException(HTTP_STATUS.SERVER_ERROR, "can not get user id");
+export const getCurrentUserInfo = (req: Request): JwtAuth => {
+  const user = req.user;
+  if (!user) {
+    throw new HttpException(HTTP_STATUS.SERVER_ERROR, "can not get user info");
   }
 
-  return id;
+  return user;
 };

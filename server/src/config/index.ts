@@ -14,6 +14,7 @@ interface Config {
     port: number;
     senderEmail: string;
     senderPassword: string;
+    service: string;
     isAllowedSending: boolean;
   };
   salt: number;
@@ -35,7 +36,9 @@ const config: Config = {
     port: parseInt(process.env.MAIL_SENDER_PORT || "587"),
     senderEmail: process.env.MAIL_SENDER_EMAIL || "",
     senderPassword: process.env.MAIL_SENDER_PASSWORD || "",
-    isAllowedSending: process.env.MAIL_SENDER_IS_ALLOWED_SENDING === "true" || false,
+    service: process.env.MAIL_SENDER_SERVICE || "",
+    isAllowedSending:
+      process.env.MAIL_SENDER_IS_ALLOWED_SENDING === "true" || false,
   },
   salt: parseInt(process.env.SALT_ROUNDS || "10"),
   jwt: {

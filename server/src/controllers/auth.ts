@@ -1,11 +1,12 @@
 import { NextFunction, Request, Response } from "express";
 import authService from "../services/auth";
 import HTTP_STATUS from "../utils/httpStatusCodes";
-import { getCurrentUserId } from "../utils/request";
+import { getCurrentUserInfo } from "../utils/request";
 import { RequestWithBody } from "../types/request";
 import { LoginUserModel, RegisterUserModel } from "../types/models";
 
 // register a new user
+// POST api/v1/auth/register
 const register = async (
   req: RequestWithBody<RegisterUserModel>,
   res: Response,
@@ -27,7 +28,8 @@ const register = async (
   }
 };
 
-// login user
+// login a user
+// POST api/v1/auth/login
 const login = async (
   req: RequestWithBody<LoginUserModel>,
   res: Response,
@@ -45,9 +47,10 @@ const login = async (
 };
 
 // get me
+// GET api/v1/auth/me
 const me = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const userId = getCurrentUserId(req);
+    const { id: userId } = getCurrentUserInfo(req);
 
     const user = await authService.me(userId);
 

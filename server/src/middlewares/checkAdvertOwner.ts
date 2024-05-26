@@ -1,17 +1,18 @@
 import { NextFunction, Response } from "express";
-import { getCurrentUserId } from "../utils/request";
+import { getCurrentUserInfo } from "../utils/request";
 import advertsService from "../services/adverts";
 import { RequestWithParams } from "../types/request";
 import HttpException from "../errors/httpException";
 import HTTP_STATUS from "../utils/httpStatusCodes";
 
+// checkAdvertOwner middleware checks if advert creator id equal current user id
 const checkAdvertOwner = async (
   req: RequestWithParams<{ id: string }>,
   _: Response,
   next: NextFunction
 ) => {
   try {
-    const userId = getCurrentUserId(req);
+    const { id: userId } = getCurrentUserInfo(req);
 
     const advertId = parseInt(req.params.id);
 

@@ -3,6 +3,7 @@ import HttpException from "../errors/httpException.js";
 import { NextFunction, Request, Response } from "express";
 import { Role } from "../types/models.js";
 
+// authorizeRole middleware checks if the current user role exists in passed an array of roles
 const authorizeRole =
   (roles: Role[] = []) =>
   (req: Request, _: Response, next: NextFunction) => {

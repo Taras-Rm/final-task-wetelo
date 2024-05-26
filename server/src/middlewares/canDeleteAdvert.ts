@@ -1,18 +1,18 @@
 import { NextFunction, Response } from "express";
 import { RequestWithParams } from "../types/request";
 import advertsService from "../services/adverts";
-import { getCurrentUserId } from "../utils/request";
+import { getCurrentUserInfo } from "../utils/request";
 import HttpException from "../errors/httpException";
 import HTTP_STATUS from "../utils/httpStatusCodes";
 
+// canDeleteAdvert middleware checks if current user is admin or advert creator id equal current user id
 const canDeleteAdvert = async (
   req: RequestWithParams<{ id: string }>,
   _: Response,
   next: NextFunction
 ) => {
   try {
-    const userId = getCurrentUserId(req);
-    const userRole = req.user?.role;
+    const { id: userId, role: userRole } = getCurrentUserInfo(req);
 
     const advertId = parseInt(req.params.id);
 

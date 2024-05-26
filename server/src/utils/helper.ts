@@ -1,6 +1,6 @@
-// exclude fields from user
-export const excludeFields = (user: Object, keys: string[]) => {
+// exclude fields from object
+export const excludeFields = (obj: Object, keys: string[]) => {
   return Object.fromEntries(
-    Object.entries(user).filter(([key]) => !keys.includes(key))
+    Object.entries(obj).filter(([key]) => !keys.includes(key))
   );
 };
