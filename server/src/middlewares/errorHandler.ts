@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import HttpException from "../errors/httpException";
+import logger from "../utils/logger";
 
 const errorHandler = (
   err: any,
@@ -7,7 +8,7 @@ const errorHandler = (
   res: Response,
   next: NextFunction
 ) => {
-  console.log(err);
+  logger.error("Error: ", err);
 
   const errInfo = HttpException.getInfo(err);
 

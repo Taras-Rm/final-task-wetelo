@@ -3,6 +3,7 @@ import config from "../config";
 import handlebars from "handlebars";
 import { TemplateName } from "../types/models";
 import { templates } from "../templates/email";
+import logger from "../utils/logger";
 
 const transporter = nodemailer.createTransport({
   service: config.mail.service,
@@ -40,11 +41,11 @@ const sendEmail = async (options: MailOptions) => {
 
   try {
     const info = await transporter.sendMail(mailOptions);
-    console.log(
+    logger.info(
       `Message sent to ${mailOptions.to}. Message id: ${info.messageId}`
     );
   } catch (error) {
-    console.log(`Sending mail error:  ${error}`);
+    logger.error(`Sending mail error:  ${error}`);
   }
 };
 
