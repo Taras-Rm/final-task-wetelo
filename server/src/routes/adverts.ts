@@ -12,13 +12,13 @@ import canDeleteAdvert from "../middlewares/canDeleteAdvert";
 
 const router = Router();
 
-router.get("/", advertsController.getAllAdverts); // ok
+router.get("/", advertsController.getAllAdverts);
 router.post(
   "/",
   checkVerification,
   createAdvertValidator,
   advertsController.createAdvert
-); // ok
+);
 router.put(
   "/:id",
   checkVerification,
@@ -26,7 +26,7 @@ router.put(
   checkAdvertOwner,
   updateAdvertValidator,
   advertsController.updateAdvert
-); // ok
+);
 router.delete(
   "/:id",
   checkVerification,
