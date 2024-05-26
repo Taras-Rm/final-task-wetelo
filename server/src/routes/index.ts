@@ -14,7 +14,7 @@ router.get("/ping", (_, res: Response) => {
 });
 
 router.use("/auth", authRouter);
-router.use("/adverts", auth, advertsRouter);
 router.use("/users", auth, authorizeRole(["admin"]), usersRouter);
+router.use("/adverts", auth, advertsRouter);
 
 export default router;

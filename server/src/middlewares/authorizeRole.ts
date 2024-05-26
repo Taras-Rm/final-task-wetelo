@@ -1,9 +1,10 @@
 import HTTP_STATUS from "../utils/httpStatusCodes.js";
 import HttpException from "../errors/httpException.js";
 import { NextFunction, Request, Response } from "express";
+import { Role } from "../types/models.js";
 
 const authorizeRole =
-  (roles: string[] = []) =>
+  (roles: Role[] = []) =>
   (req: Request, _: Response, next: NextFunction) => {
     try {
       const role = req.user?.role;

@@ -1,9 +1,11 @@
 import { NextFunction, Request, Response } from "express";
 import usersService from "../services/users";
 import HTTP_STATUS from "../utils/httpStatusCodes";
+import { RequestWithParams, RequestWithParamsAndBody } from "../types/request";
+import { UpdateUserByIdModel } from "../types/models";
 
 // get all users
-const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
+const getAllUsers = async (_: Request, res: Response, next: NextFunction) => {
   try {
     const users = await usersService.getAllUsers();
 
@@ -14,7 +16,11 @@ const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 // update an user
-const updateUser = async (req: Request, res: Response, next: NextFunction) => {
+const updateUser = async (
+  req: RequestWithParamsAndBody<{ id: string }, UpdateUserByIdModel>,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const { name, email, phone } = req.body;
     const { id } = req.params;
@@ -33,7 +39,11 @@ const updateUser = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 // delete an user
-const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
+const deleteUser = async (
+  req: RequestWithParams<{ id: string }>,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const { id } = req.params;
 
@@ -46,7 +56,11 @@ const deleteUser = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 // verify user
-const verifyUser = async (req: Request, res: Response, next: NextFunction) => {
+const verifyUser = async (
+  req: RequestWithParams<{ id: string }>,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const { id } = req.params;
 
@@ -59,7 +73,11 @@ const verifyUser = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 // get an user
-const getUser = async (req: Request, res: Response, next: NextFunction) => {
+const getUser = async (
+  req: RequestWithParams<{ id: string }>,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const { id } = req.params;
 

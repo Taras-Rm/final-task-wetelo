@@ -56,7 +56,7 @@ const priceValidator = () =>
     .withMessage("price should be a positive number");
 
 const idParamValidator = () =>
-  param("id").isInt().withMessage("id should be a number");
+  param("id").isInt().withMessage("id param should be a number");
 
 export {
   nameValidator,

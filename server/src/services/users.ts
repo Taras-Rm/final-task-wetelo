@@ -21,6 +21,34 @@ const updateUserById = async ({
   phone,
   email,
 }: UpdateUserByIdModel) => {
+  // check if user exists
+  const existingUser = await prisma.user.findFirst({
+    where: {
+      id,
+    },
+  });
+
+  if (!existingUser) {
+    throw new HttpException(
+      HTTP_STATUS.NOT_FOUND,
+      `user with id: ${id} not found`
+    );
+  }
+
+  // check if user email exists
+  const existingUserEmail = await prisma.user.findFirst({
+    where: {
+      email,
+    },
+  });
+
+  if (existingUserEmail && existingUserEmail.id !== id) {
+    throw new HttpException(
+      HTTP_STATUS.BAD_REQUEST,
+      `user with email: ${email} already exists`
+    );
+  }
+
   const user = await prisma.user.update({
     data: {
       name,
@@ -32,7 +60,7 @@ const updateUserById = async ({
     },
   });
 
-  return user;
+  return excludeFields(user, ["password"]);
 };
 
 const getUserById = async (id: number) => {
