@@ -4,15 +4,27 @@ import HTTP_STATUS from "../utils/httpStatusCodes";
 import { UpdateUserByIdModel } from "../types/models";
 import prisma from "../database";
 
+const findUserById = async (id: number) => {
+  const user = await prisma.user.findFirst({
+    where: {
+      id,
+    },
+  });
+
+  if (!user) {
+    throw new HttpException(
+      HTTP_STATUS.NOT_FOUND,
+      `user with id: ${id} not found`
+    );
+  }
+
+  return user;
+};
+
 const getAllUsers = async () => {
   const users = await prisma.user.findMany();
 
-  const readyUsers = [];
-  for (let user of users) {
-    readyUsers.push(excludeFields(user, ["password"]));
-  }
-
-  return readyUsers;
+  return users.map((user) => excludeFields(user, ["password"]));
 };
 
 const updateUserById = async ({
@@ -22,18 +34,7 @@ const updateUserById = async ({
   email,
 }: UpdateUserByIdModel) => {
   // check if user exists
-  const existingUser = await prisma.user.findFirst({
-    where: {
-      id,
-    },
-  });
-
-  if (!existingUser) {
-    throw new HttpException(
-      HTTP_STATUS.NOT_FOUND,
-      `user with id: ${id} not found`
-    );
-  }
+  await findUserById(id);
 
   // check if user email exists
   const existingUserEmail = await prisma.user.findFirst({
@@ -64,35 +65,14 @@ const updateUserById = async ({
 };
 
 const getUserById = async (id: number) => {
-  const user = await prisma.user.findFirst({
-    where: {
-      id,
-    },
-  });
-
-  if (!user) {
-    throw new HttpException(
-      HTTP_STATUS.NOT_FOUND,
-      `user with id: ${id} not found`
-    );
-  }
+  const user = await findUserById(id);
 
   return excludeFields(user, ["password"]);
 };
 
 const verifyUserById = async (id: number) => {
-  const userForVerify = await prisma.user.findFirst({
-    where: {
-      id,
-    },
-  });
-
-  if (!userForVerify) {
-    throw new HttpException(
-      HTTP_STATUS.NOT_FOUND,
-      `user with id: ${id} not found`
-    );
-  }
+  // check if user exists
+  await findUserById(id);
 
   const user = await prisma.user.update({
     where: {
@@ -107,18 +87,8 @@ const verifyUserById = async (id: number) => {
 };
 
 const deleteUserById = async (id: number) => {
-  const userForDelete = await prisma.user.findFirst({
-    where: {
-      id,
-    },
-  });
-
-  if (!userForDelete) {
-    throw new HttpException(
-      HTTP_STATUS.NOT_FOUND,
-      `user with id: ${id} not found`
-    );
-  }
+  // check if user exists
+  await findUserById(id);
 
   const user = await prisma.user.delete({
     where: {
