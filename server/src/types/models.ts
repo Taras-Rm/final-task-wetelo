@@ -3,33 +3,33 @@ import { templates } from "../templates/email";
 
 export type Role = PrismaRole;
 
-export type RegisterUser = {
+export type RegisterUserModel = {
   name: string;
   phone: string;
   email: string;
   password: string;
 };
 
-export type LoginUser = {
+export type LoginUserModel = {
   email: string;
   password: string;
 };
 
-export type UpdateUserById = {
+export type UpdateUserByIdModel = {
   id: number;
   name: string;
   phone: string;
   email: string;
 };
 
-export type CreateAdvert = {
+export type CreateAdvertModel = {
   title: string;
   description?: string;
   price: number;
   userId: number;
 };
 
-export type UpdateAdvertById = {
+export type UpdateAdvertByIdModel = {
   id: number;
   title: string;
   description?: string;

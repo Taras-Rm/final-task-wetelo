@@ -2,9 +2,15 @@ import { NextFunction, Request, Response } from "express";
 import authService from "../services/auth";
 import HTTP_STATUS from "../utils/httpStatusCodes";
 import { getCurrentUserId } from "../utils/request";
+import { RequestWithBody } from "../types/request";
+import { LoginUserModel, RegisterUserModel } from "../types/models";
 
 // register a new user
-const register = async (req: Request, res: Response, next: NextFunction) => {
+const register = async (
+  req: RequestWithBody<RegisterUserModel>,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const { name, phone, email, password } = req.body;
 
@@ -22,7 +28,11 @@ const register = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 // login user
-const login = async (req: Request, res: Response, next: NextFunction) => {
+const login = async (
+  req: RequestWithBody<LoginUserModel>,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const { email, password } = req.body;
 

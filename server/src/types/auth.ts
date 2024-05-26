@@ -1,4 +1,4 @@
-import { Role } from "./types";
+import { Role } from "./models";
 
 export type JwtAuth = {
   id: number;

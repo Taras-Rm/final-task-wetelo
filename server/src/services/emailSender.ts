@@ -1,9 +1,7 @@
 import nodemailer from "nodemailer";
 import config from "../config";
-import path from "path";
-import fs from "fs";
 import handlebars from "handlebars";
-import { TemplateName } from "../types/types";
+import { TemplateName } from "../types/models";
 import { templates } from "../templates/email";
 
 const transporter = nodemailer.createTransport({

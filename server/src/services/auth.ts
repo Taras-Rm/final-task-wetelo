@@ -3,13 +3,17 @@ import jwt from "jsonwebtoken";
 import HttpException from "../errors/httpException";
 import HTTP_STATUS from "../utils/httpStatusCodes";
 import { excludeFields } from "../utils/helper";
-// import { sendVerifyUserRegistration } from "../mailSender.js";
-import { LoginUser, RegisterUser } from "../types/types";
+import { LoginUserModel, RegisterUserModel } from "../types/models";
 import prisma from "../database";
 import config from "../config";
 import { sendEmail } from "./emailSender";
 
-const registerUser = async ({ name, phone, email, password }: RegisterUser) => {
+const registerUser = async ({
+  name,
+  phone,
+  email,
+  password,
+}: RegisterUserModel) => {
   const existingUser = await prisma.user.findFirst({
     where: {
       email,
@@ -23,7 +27,7 @@ const registerUser = async ({ name, phone, email, password }: RegisterUser) => {
     );
   }
 
-  const hashedPassword = await bcrypt.hash(password, parseInt("10"));
+  const hashedPassword = await bcrypt.hash(password, config.salt);
 
   const createdUser = await prisma.user.create({
     data: {
@@ -54,7 +58,7 @@ const registerUser = async ({ name, phone, email, password }: RegisterUser) => {
   return excludeFields(createdUser, ["password"]);
 };
 
-const loginUser = async ({ email, password }: LoginUser) => {
+const loginUser = async ({ email, password }: LoginUserModel) => {
   const user = await prisma.user.findFirst({
     where: {
       email,
@@ -94,7 +98,7 @@ const me = async (id: number) => {
     },
   });
 
-  return user;
+  return user && excludeFields(user, ["password"]);
 };
 
 export default { registerUser, loginUser, me };
