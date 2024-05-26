@@ -7,7 +7,7 @@ async function main() {
   const admin = await prisma.user.create({
     data: {
       name: "Tom",
-      phone: "0981234323",
+      phone: "1234567890",
       email: "tarasromaniuk555@gmail.com",
       password: "$2b$10$4V9lz1TPB5Tb6dYOK./W4eA5pnFm4uLAKEb.moQIk2Z.CP5Vu2ttC",
       isVerified: true,
