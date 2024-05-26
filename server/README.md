@@ -8,7 +8,10 @@ This is a basic API that allows us to work with users and adverts (CRUD). Allows
 - Express.js
 - TypeScript
 - Prisma
+- node-telegram-bot-api
+- nodemailer
 - express-validator
+- winston
 
 ## This API contains such endpoints:
 

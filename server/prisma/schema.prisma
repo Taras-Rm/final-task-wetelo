@@ -16,6 +16,7 @@ model User {
   role       Role     @default(user)
   isVerified Boolean  @default(false) @map("is_verified")
   adverts    Advert[]
+  chatId     Int?     @map("chat_id")
 
   @@map("users")
 }

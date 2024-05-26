@@ -21,6 +21,9 @@ interface Config {
     secret: string;
     expTime: string;
   };
+  bot: {
+    token: string;
+  };
   notifyAdmins: boolean;
 }
 
@@ -42,6 +45,9 @@ const config: Config = {
   jwt: {
     secret: process.env.TOKEN_SECRET || "secret",
     expTime: process.env.TOKEN_EXP_TIME || "24h",
+  },
+  bot: {
+    token: process.env.BOT_TOKEN || "",
   },
   notifyAdmins: process.env.NOTIFY_ADMINS === "true" || false,
 };
