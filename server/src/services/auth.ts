@@ -7,7 +7,7 @@ import { LoginUserModel, RegisterUserModel } from "../types/models";
 import prisma from "../database";
 import config from "../config";
 import { sendEmail } from "./emailSender";
-import { sendMessage } from "./bot";
+import { sendVerifyUserMessage } from "../bot/bot";
 
 const registerUser = async ({
   name,
@@ -54,12 +54,16 @@ const registerUser = async ({
           email: createdUser.email,
         },
       });
+
       // send telegram message
       admin.chatId &&
-        sendMessage({
+        sendVerifyUserMessage({
           chatId: admin.chatId,
-          text: `New user *${createdUser.name}* already registered in the system with email *${createdUser.email}*. Please check and verify`,
-          email: createdUser.email,
+          context: {
+            id: createdUser.id,
+            name: createdUser.name,
+            email: createdUser.email,
+          },
         });
     });
   }

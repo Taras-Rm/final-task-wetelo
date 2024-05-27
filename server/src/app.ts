@@ -3,7 +3,9 @@ import errorHandler from "./middlewares/errorHandler";
 import router from "./routes/index";
 import cors from "cors";
 import requestLogger from "./middlewares/requestLogger";
-import "./services/bot";
+import startBot from "./bot/bot";
+
+startBot();
 
 const app = express();
 

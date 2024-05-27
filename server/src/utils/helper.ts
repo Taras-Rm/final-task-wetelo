@@ -12,3 +12,7 @@ export const excludeFields = <
   });
   return result;
 };
+
+export const preparePhoneNumber = (phone: string) => {
+  return phone.split("").reverse().slice(0, 10).reverse().join("");
+};

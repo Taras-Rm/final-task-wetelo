@@ -99,10 +99,38 @@ const deleteUserById = async (id: number) => {
   return user.id;
 };
 
+const setAdminChatIdByPhone = async (phone: string, chatId: number) => {
+  const admin = await prisma.user.findFirst({
+    where: {
+      role: "admin",
+      phone: phone,
+    },
+  });
+
+  if (!admin) {
+    throw new HttpException(
+      HTTP_STATUS.NOT_FOUND,
+      `admin with phone: ${phone} not found`
+    );
+  }
+
+  const updatedAdmin = await prisma.user.update({
+    where: {
+      id: admin.id,
+    },
+    data: {
+      chatId: chatId,
+    },
+  });
+
+  return updatedAdmin;
+};
+
 export default {
   getAllUsers,
   updateUserById,
   verifyUserById,
   deleteUserById,
   getUserById,
+  setAdminChatIdByPhone,
 };
