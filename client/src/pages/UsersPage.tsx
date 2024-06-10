@@ -8,7 +8,7 @@ function UsersPage() {
   const dispatch = useAppDispatch();
   const users = useAppSelector((state) => state.users.users);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);  
 
   useEffect(() => {
     setIsLoading(true);

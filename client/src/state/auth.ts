@@ -5,16 +5,12 @@ import { ApiErrorT, LoginT, RegistrationT, UserT } from "../types/type";
 import { AxiosError } from "axios";
 
 export interface AuthState {
-  isLoginned: boolean;
   token: string;
   user: UserT | null;
 }
 
-const token = localStorage.getItem("token");
-
 const initialState: AuthState = {
-  isLoginned: !!token,
-  token: token || "",
+  token: localStorage.getItem("token") || "",
   user: null,
 };
 
@@ -73,18 +69,24 @@ export const me = createAsyncThunk(
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    loadTokenFromStorage: (state) => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        state.token = token;
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(
         login.fulfilled,
         (state, action: PayloadAction<{ token: string }>) => {
-          state.isLoginned = true;
           state.token = action.payload.token;
+          localStorage.setItem("token", action.payload.token);
         }
       )
       .addCase(login.rejected, (state, _) => {
-        state.isLoginned = false;
         state.token = "";
       })
       .addCase(
@@ -97,11 +99,12 @@ export const authSlice = createSlice({
         state.user = null;
       })
       .addCase(logout.fulfilled, (state, _) => {
-        state.isLoginned = false;
         state.token = "";
         state.user = null;
       });
   },
 });
+
+export const { loadTokenFromStorage } = authSlice.actions;
 
 export default authSlice.reducer;

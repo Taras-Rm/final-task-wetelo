@@ -8,7 +8,7 @@ function Header() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const { isLoginned, user } = useAppSelector((state) => state.auth);
+  const { user } = useAppSelector((state) => state.auth);
 
   const handleLogout = async () => {
     try {
@@ -22,7 +22,7 @@ function Header() {
 
   return (
     <div className="navbar mb-8 shadow-lg bg-base-300 rounded-box w-full sticky top-2 z-50 max-w-4xl mx-auto">
-      {isLoginned && user && (
+      {user && (
         <>
           <div className="navbar-start space-x-2">
             {user.role === "admin" && (

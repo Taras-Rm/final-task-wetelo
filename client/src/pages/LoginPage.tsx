@@ -25,16 +25,10 @@ function LoginPage() {
     try {
       setIsLoading(true);
 
-      await dispatch(login(data)).unwrap();
-
-      dispatch(me())
+      await dispatch(login(data))
         .unwrap()
-        .then((data) => {
-          if (data.user.role === "admin") {
-            navigate("/users");
-          } else {
-            navigate("/adverts");
-          }
+        .then(() => {
+          navigate("/users");
         });
     } catch (error) {
       toast.error(error as string);

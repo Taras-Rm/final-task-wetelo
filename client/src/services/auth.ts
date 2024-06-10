@@ -6,10 +6,6 @@ const login = async (data: LoginT) => {
     ...data,
   });
 
-  if (response.data) {
-    localStorage.setItem("token", response.data.token);
-  }
-
   return response.data;
 };
 
