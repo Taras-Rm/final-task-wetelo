@@ -9,7 +9,7 @@ function PublicRoute() {
 
   useEffect(() => {
     if (token) {
-      navigate("/users");
+      navigate("/adverts");
     }
   }, [token, navigate]);
 

@@ -1,7 +1,7 @@
 import { Field, Form, Formik } from "formik";
 import PageWrapper from "../components/PageWrapper";
 import { Link, useNavigate } from "react-router-dom";
-import { login, me } from "../state/auth";
+import { login } from "../state/auth";
 import { LoginT } from "../types/type";
 import { useAppDispatch } from "../state";
 import { useState } from "react";
@@ -28,7 +28,7 @@ function LoginPage() {
       await dispatch(login(data))
         .unwrap()
         .then(() => {
-          navigate("/users");
+          navigate("/adverts");
         });
     } catch (error) {
       toast.error(error as string);
